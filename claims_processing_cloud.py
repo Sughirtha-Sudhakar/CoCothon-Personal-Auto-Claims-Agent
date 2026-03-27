@@ -4,22 +4,34 @@ import json
 import snowflake.connector
 
 
+st.set_page_config(layout="wide")
+st.write("App started")
+
 @st.cache_resource
 def get_connection():
-    return snowflake.connector.connect(
-        account=st.secrets["snowflake"]["account"],
-        user=st.secrets["snowflake"]["user"],
-        password=st.secrets["snowflake"]["password"],
-        warehouse=st.secrets["snowflake"]["warehouse"],
-        database=st.secrets["snowflake"]["database"],
-        schema=st.secrets["snowflake"]["schema"],
-    )
+    try:
+        conn = snowflake.connector.connect(
+            account=st.secrets["snowflake"]["account"],
+            user=st.secrets["snowflake"]["user"],
+            password=st.secrets["snowflake"]["password"],
+            warehouse=st.secrets["snowflake"]["warehouse"],
+            database=st.secrets["snowflake"]["database"],
+            schema=st.secrets["snowflake"]["schema"],
+        )
+        st.success(":white_check_mark: Connected to Snowflake")
+        return conn
+
+    except Exception as e:
+        st.error(f":x: Snowflake connection failed: {str(e)}")
+        return None
 
 
 conn = get_connection()
+if conn is None:
+    st.stop()   # Stops app safely if connection fails
 TABLE = "CLAIMS_AI_DB.CLAIMS.INSURANCE_CLAIMS_DEMO"
 
-st.set_page_config(layout="wide")
+
 
 CUSTOM_CSS = """
 <style>
