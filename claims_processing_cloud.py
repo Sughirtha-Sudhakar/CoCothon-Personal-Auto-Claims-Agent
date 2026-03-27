@@ -8,8 +8,7 @@ st.set_page_config(layout="wide")
 st.write("App started")
 st.write(st.secrets)
 
-st.set_page_config(layout="wide")
-st.write("App started")
+
 
 def get_connection():
     try:
