@@ -14,12 +14,12 @@ st.write("App started")
 def get_connection():
     try:
         conn = snowflake.connector.connect(
-            user=st.secrets["snowflake_user"],
-            password=st.secrets["snowflake_password"],
-            account=st.secrets["snowflake_account"],
-            warehouse=st.secrets["snowflake_warehouse"],
-            database=st.secrets["snowflake_database"],
-            schema=st.secrets["snowflake_schema"]
+            user=st.secrets["snowflake"]["user"],
+            password=st.secrets["snowflake"]["password"],
+            account=st.secrets["snowflake"]["account"],
+            warehouse=st.secrets["snowflake"]["warehouse",
+            database=st.secrets["snowflake"]["database"],
+            schema=st.secrets["snowflake"]["schema"]
         )
         return conn
     except Exception as e:
