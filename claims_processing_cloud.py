@@ -27,9 +27,9 @@ st.write("App started")
 #         return None
 
 
-# conn = get_connection()
-# if conn is None:
-    # st.stop()
+conn = get_connection()
+if conn is None:
+    st.stop()
 TABLE = "CLAIMS_AI_DB.CLAIMS.INSURANCE_CLAIMS_DEMO"
 
 
