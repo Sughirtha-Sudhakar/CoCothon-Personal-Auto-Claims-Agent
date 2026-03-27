@@ -294,8 +294,11 @@ def screen_claim_detail():
         triage = row["AI_TRIAGE_CATEGORY"]
         st.markdown(f"**AI Triage Category:** {get_triage_badge(triage)}", unsafe_allow_html=True)
 
-        st.markdown("**AI Initial Notes:**")
-        st.text_area("", value=str(row["AI_INITIAL_NOTES"] or ""), height=120, disabled=True, key="ai_notes")
+        # st.markdown("**AI Initial Notes:**")
+        # st.text_area("", value=str(row["AI_INITIAL_NOTES"] or ""), height=120, disabled=True, key="ai_notes")
+        st.markdown(f"""<div style="background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%); padding: 15px; border-radius: 8px; color: #ffffff;border: 1px solid #2a3f5f;">
+                    <strong>AI Initial Notes:</strong><br><br>{row["AI_INITIAL_NOTES"] or "No initial notes available"}
+                    </div>""", unsafe_allow_html=True)
 
         st.markdown(f"""
         <div class="action-box">
