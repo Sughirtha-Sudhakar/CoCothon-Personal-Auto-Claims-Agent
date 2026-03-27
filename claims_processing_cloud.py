@@ -7,28 +7,28 @@ import snowflake.connector
 st.set_page_config(layout="wide")
 st.write("App started")
 
-@st.cache_resource
-def get_connection():
-    try:
-        conn = snowflake.connector.connect(
-            account=st.secrets["snowflake"]["account"],
-            user=st.secrets["snowflake"]["user"],
-            password=st.secrets["snowflake"]["password"],
-            warehouse=st.secrets["snowflake"]["warehouse"],
-            database=st.secrets["snowflake"]["database"],
-            schema=st.secrets["snowflake"]["schema"],
-        )
-        st.success(":white_check_mark: Connected to Snowflake")
-        return conn
+st.set_page_config(layout="wide")
+st.write("App started")
 
-    except Exception as e:
-        st.error(f":x: Snowflake connection failed: {str(e)}")
-        return None
+def get_connection():
+    try:
+        conn = snowflake.connector.connect(
+            user=st.secrets["snowflake_user"],
+            password=st.secrets["snowflake_password"],
+            account=st.secrets["snowflake_account"],
+            warehouse=st.secrets["snowflake_warehouse"],
+            database=st.secrets["snowflake_database"],
+            schema=st.secrets["snowflake_schema"]
+        )
+        return conn
+    except Exception as e:
+        st.error(f"Error connecting to Snowflake: {e}")
+        return None
 
 
 conn = get_connection()
 if conn is None:
-    st.stop()   # Stops app safely if connection fails
+    st.stop()
 TABLE = "CLAIMS_AI_DB.CLAIMS.INSURANCE_CLAIMS_DEMO"
 
 
