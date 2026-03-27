@@ -20,7 +20,10 @@ def get_connection():
             database=st.secrets["snowflake"]["database"],
             schema=st.secrets["snowflake"]["schema"]
         )
+        cur=conn.cursor()
+        cur.execute(f"USE WAREHOUSE {st.secrets['snowflake']['warehouse']}")
         return conn
+        
     except Exception as e:
         st.error(f"Error connecting to Snowflake: {e}")
         return None
