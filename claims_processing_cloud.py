@@ -6,7 +6,7 @@ import snowflake.connector
 
 st.set_page_config(layout="wide")
 st.write("App started")
-st.write(st.secrets)
+
 
 
 
